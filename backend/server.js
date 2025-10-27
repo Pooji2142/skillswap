@@ -22,25 +22,26 @@ app.use("/api/skills", skillRoutes);
 app.use("/api/requests", requestRoutes);
 app.use("/api/messages", messageRoutes);
 
+// TEST ROUTE
 app.get("/", (req, res) => {
-  res.send("✅ SkillSwap Backend Running");
+  res.send("✅ SkillSwap Backend is running fine!");
 });
 
 // CONNECT TO MONGO
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB Connected"))
-  .catch((err) => console.error("❌ DB Connection Error:", err));
+  .catch((err) => console.error("❌ MongoDB Error:", err));
 
-// === Serve Frontend in Production ===
+// STATIC FILES (frontend)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const frontendPath = path.join(__dirname, "../frontend/build");
+app.use(express.static(frontendPath));
 
-app.use(express.static(path.join(__dirname, "../frontend/build")));
-
-// ✅ FIX for Express 5+ (use regex instead of "*")
-app.get(/.*/, (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
+// ✅ FIX — use middleware instead of app.get("*")
+app.use((req, res) => {
+  res.sendFile(path.join(frontendPath, "index.html"));
 });
 
 // START SERVER
