@@ -1,5 +1,5 @@
 // api.js
-const API_URL ="https://skillswap-backend-0fuf.onrender.com";
+const API_URL = "https://skillswap-backend-0fuf.onrender.com/api";
 
 export const getToken = () => localStorage.getItem("token");
 

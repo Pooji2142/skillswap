@@ -13,8 +13,15 @@ import messageRoutes from "./routes/messageRoutes.js";
 dotenv.config();
 
 const app = express();
-app.use(cors());
 app.use(express.json());
+
+// ✅ Allow only your frontend URL
+app.use(
+  cors({
+    origin: ["https://skillswap-frontend.onrender.com"], // change this if your frontend name differs
+    credentials: true,
+  })
+);
 
 // ROUTES
 app.use("/api/auth", authRoutes);
@@ -33,13 +40,11 @@ mongoose
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => console.error("❌ MongoDB Error:", err));
 
-// STATIC FILES (frontend)
+// SERVE FRONTEND (optional)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const frontendPath = path.join(__dirname, "../frontend/build");
 app.use(express.static(frontendPath));
-
-// ✅ FIX — use middleware instead of app.get("*")
 app.use((req, res) => {
   res.sendFile(path.join(frontendPath, "index.html"));
 });
