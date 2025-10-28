@@ -40,16 +40,24 @@ const Register = ({ setToken }) => {
       return;
     }
 
-    const data = await apiPost("/auth/register", { name, email, password });
+    try {
+      // ✅ Corrected endpoint: /api/auth/register
+      const data = await apiPost("/api/auth/register", { name, email, password });
 
-    if (data.user) {
-      alert("✅ Registration successful! Please log in.");
-      setName("");
-      setEmail("");
-      setPassword("");
-      setStrength("");
-    } else {
-      alert(data.message || "❌ Registration failed");
+      console.log("Backend response:", data); // Debug log
+
+      if (data.user) {
+        alert("✅ Registration successful! Please log in.");
+        setName("");
+        setEmail("");
+        setPassword("");
+        setStrength("");
+      } else {
+        alert(data.message || "❌ Registration failed");
+      }
+    } catch (error) {
+      console.error("Registration error:", error);
+      alert("❌ Something went wrong. Try again later.");
     }
   };
 
