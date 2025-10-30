@@ -8,7 +8,9 @@ const ReceivedRequests = () => {
   const [inputs, setInputs] = useState({}); // message/meetingLink per request
 
   const fetchReceivedRequests = async () => {
-    const data = await apiGet("/requests/received");
+    // const data = await apiGet("/requests/received");
+    const data = await apiGet("/api/requests/received");
+
     setRequests(data);
   };
 

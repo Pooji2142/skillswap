@@ -7,7 +7,9 @@ const SentRequests = () => {
   const [requests, setRequests] = useState([]);
 
   const fetchSentRequests = async () => {
-    const data = await apiGet("/requests/sent");
+    // const data = await apiGet("/requests/sent");
+    const data = await apiGet("/api/requests/sent");
+
     setRequests(data);
   };
 

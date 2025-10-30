@@ -1,9 +1,9 @@
+// backend/server.js
+
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
-import path from "path";
-import { fileURLToPath } from "url";
 
 import authRoutes from "./routes/authRoutes.js";
 import skillRoutes from "./routes/skillRoutes.js";
@@ -15,40 +15,31 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-// ✅ Allow only your frontend URL
+// ✅ Allow only localhost frontend (for local use)
 app.use(
   cors({
-    origin: ["https://skillswap-frontend.onrender.com"], // change this if your frontend name differs
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
 
-// ROUTES
+// ✅ ROUTES
 app.use("/api/auth", authRoutes);
 app.use("/api/skills", skillRoutes);
 app.use("/api/requests", requestRoutes);
 app.use("/api/messages", messageRoutes);
 
-// TEST ROUTE
+// ✅ TEST route
 app.get("/", (req, res) => {
-  res.send("✅ SkillSwap Backend is running fine!");
+  res.send("✅ SkillSwap Backend running locally");
 });
 
-// CONNECT TO MONGO
+// ✅ MONGODB CONNECTION
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB Connected"))
-  .catch((err) => console.error("❌ MongoDB Error:", err));
+  .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
-// SERVE FRONTEND (optional)
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const frontendPath = path.join(__dirname, "../frontend/build");
-app.use(express.static(frontendPath));
-app.use((req, res) => {
-  res.sendFile(path.join(frontendPath, "index.html"));
-});
-
-// START SERVER
+// ✅ START SERVER
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Local Server running at http://localhost:${PORT}`));

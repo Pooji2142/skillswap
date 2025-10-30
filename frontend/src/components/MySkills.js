@@ -1,5 +1,3 @@
-
-
 import { useState, useEffect } from "react";
 import { apiGet, apiPost, apiPut, apiDelete } from "../utils/api";
 
@@ -9,7 +7,7 @@ const MySkills = () => {
   const [editing, setEditing] = useState(null);
 
   const fetchSkills = async () => {
-    const data = await apiGet("/skills/my");
+    const data = await apiGet("/api/skills/my");
     setSkills(data || []);
   };
 
@@ -18,10 +16,12 @@ const MySkills = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (editing) {
-      await apiPut(`/skills/${editing._id}`, form);
+      // ✅ fixed: added /api/
+      await apiPut(`/api/skills/${editing._id}`, form);
       setEditing(null);
     } else {
-      await apiPost("/skills", form);
+      // ✅ fixed: added /api/
+      await apiPost("/api/skills", form);
     }
     setForm({ skillName: "", description: "", level: "" });
     fetchSkills();
@@ -31,7 +31,8 @@ const MySkills = () => {
 
   const handleDelete = async (id) => {
     if (window.confirm("Delete this skill?")) {
-      await apiDelete(`/skills/${id}`);
+      // ✅ fixed: added /api/
+      await apiDelete(`/api/skills/${id}`);
       fetchSkills();
     }
   };
@@ -82,8 +83,18 @@ const MySkills = () => {
                 <p>{s.description}</p>
                 <small className="text-muted">{s.level}</small>
                 <div className="mt-2">
-                  <button className="btn btn-sm btn-outline-primary me-2" onClick={() => handleEdit(s)}>Edit</button>
-                  <button className="btn btn-sm btn-outline-danger" onClick={() => handleDelete(s._id)}>Delete</button>
+                  <button
+                    className="btn btn-sm btn-outline-primary me-2"
+                    onClick={() => handleEdit(s)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="btn btn-sm btn-outline-danger"
+                    onClick={() => handleDelete(s._id)}
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>

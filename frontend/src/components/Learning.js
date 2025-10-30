@@ -9,25 +9,41 @@ const Learning = () => {
   const [teacherContactInfo, setTeacherContactInfo] = useState("");
 
   const fetchRequests = async () => {
-    const sentData = await apiGet("/requests/sent");
-    const receivedData = await apiGet("/requests/received");
-    setSent(sentData || []);
-    setReceived(receivedData || []);
+    try {
+      // ✅ Add /api/ prefix
+      const sentData = await apiGet("/api/requests/sent");
+      const receivedData = await apiGet("/api/requests/received");
+
+      setSent(sentData || []);
+      setReceived(receivedData || []);
+    } catch (err) {
+      console.error("Error fetching requests:", err);
+      alert("⚠️ Failed to load requests.");
+    }
   };
 
   const handleAction = async (id, status) => {
-    const body = { status };
-    if (status === "approved") {
-      const link = prompt("Enter meeting link (optional):");
-      if (link) body.meetingLink = link;
-      if (meetingTime) body.meetingTime = meetingTime;
-      if (teacherContactInfo) body.teacherContactInfo = teacherContactInfo;
+    try {
+      const body = { status };
+
+      if (status === "approved") {
+        const link = prompt("Enter meeting link (optional):");
+        if (link) body.meetingLink = link;
+        if (meetingTime) body.meetingTime = meetingTime;
+        if (teacherContactInfo) body.teacherContactInfo = teacherContactInfo;
+      }
+
+      // ✅ Add /api/ prefix here too
+      await apiPut(`/api/requests/${id}`, body);
+
+      alert(`✅ Request ${status}`);
+      setMeetingTime("");
+      setTeacherContactInfo("");
+      fetchRequests();
+    } catch (err) {
+      console.error("Error updating request:", err);
+      alert("⚠️ Failed to update request.");
     }
-    await apiPut(`/requests/${id}`, body);
-    alert(`Request ${status}`);
-    setMeetingTime("");
-    setTeacherContactInfo("");
-    fetchRequests();
   };
 
   useEffect(() => {
@@ -70,7 +86,7 @@ const Learning = () => {
       <section className="mt-5">
         <h4>📥 Received Requests</h4>
         {received.length === 0 ? (
-          <p>No requests received.</p>
+          <p>No requests received yet.</p>
         ) : (
           <ul className="list-group">
             {received.map((r) => (

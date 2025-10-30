@@ -1,16 +1,27 @@
-// api.js
-const API_URL = "https://skillswap-backend-0fuf.onrender.com/api";
+// frontend/src/utils/api.js
+const API_URL = "http://localhost:5000"; // ✅ base URL only
 
 export const getToken = () => localStorage.getItem("token");
 
+// Helper for error handling
+const handleResponse = async (res, endpoint, method) => {
+  if (!res.ok) {
+    const msg = await res.text();
+    console.error(`❌ ${method} ${endpoint} failed:`, msg);
+    throw new Error(`${method} ${endpoint} failed: ${msg}`);
+  }
+  return res.json();
+};
+
+// GET
 export const apiGet = async (endpoint) => {
   const res = await fetch(`${API_URL}${endpoint}`, {
     headers: { Authorization: `Bearer ${getToken()}` },
   });
-  if (!res.ok) throw new Error(`GET ${endpoint} failed`);
-  return res.json();
+  return handleResponse(res, endpoint, "GET");
 };
 
+// POST
 export const apiPost = async (endpoint, body) => {
   const res = await fetch(`${API_URL}${endpoint}`, {
     method: "POST",
@@ -20,10 +31,10 @@ export const apiPost = async (endpoint, body) => {
     },
     body: JSON.stringify(body),
   });
-  if (!res.ok) throw new Error(`POST ${endpoint} failed`);
-  return res.json();
+  return handleResponse(res, endpoint, "POST");
 };
 
+// PUT
 export const apiPut = async (endpoint, body) => {
   const res = await fetch(`${API_URL}${endpoint}`, {
     method: "PUT",
@@ -33,15 +44,14 @@ export const apiPut = async (endpoint, body) => {
     },
     body: JSON.stringify(body),
   });
-  if (!res.ok) throw new Error(`PUT ${endpoint} failed`);
-  return res.json();
+  return handleResponse(res, endpoint, "PUT");
 };
 
+// DELETE
 export const apiDelete = async (endpoint) => {
   const res = await fetch(`${API_URL}${endpoint}`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${getToken()}` },
   });
-  if (!res.ok) throw new Error(`DELETE ${endpoint} failed`);
-  return res.json();
+  return handleResponse(res, endpoint, "DELETE");
 };

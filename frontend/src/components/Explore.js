@@ -3,12 +3,15 @@
 import { useEffect, useState } from "react";
 import { apiGet, apiPost } from "../utils/api";
 
+
 const Explore = () => {
   const [skills, setSkills] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchSkills = async () => {
-    const data = await apiGet("/skills");
+    // const data = await apiGet("/skills");
+    const data = await apiGet("/api/skills");
+
     setSkills(data || []);
     setLoading(false);
   };
@@ -16,7 +19,7 @@ const Explore = () => {
   const handleRequest = async (skillId) => {
     const message = prompt("Enter a short message for the teacher:");
     if (!message) return;
-    const data = await apiPost("/requests", { skillId, message });
+const data = await apiPost("/api/requests", { skillId, message });
     alert(data.message || "Request sent successfully!");
   };
 

@@ -6,14 +6,16 @@ const ChatBox = ({ requestId }) => {
   const [text, setText] = useState("");
   const chatEndRef = useRef(null);
 
+
+
   const fetchMessages = useCallback(async () => {
-    const data = await apiGet(`/messages/${requestId}`);
+    const data = await apiGet(`/api/messages/${requestId}`);
     setMessages(data);
   }, [requestId]);
 
   const sendMessage = async () => {
     if (!text.trim()) return;
-    await apiPost(`/messages/${requestId}`, { text });
+    await apiPost(`/api/messages/${requestId}`, { text });
     setText("");
     fetchMessages();
   };
