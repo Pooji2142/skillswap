@@ -1,6 +1,5 @@
 // frontend/src/utils/api.js
-const API_URL = "http://localhost:5000"; // ✅ base URL only
-
+const API_URL = process.env.REACT_APP_API_URL;
 export const getToken = () => localStorage.getItem("token");
 
 // Helper for error handling

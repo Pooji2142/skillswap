@@ -18,10 +18,14 @@ app.use(express.json());
 // ✅ Allow only localhost frontend (for local use)
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: [
+      "http://localhost:3000", // local frontend
+      "https://skill-swap-project.netlify.app", // deployed frontend
+    ],
     credentials: true,
   })
 );
+
 
 // ✅ ROUTES
 app.use("/api/auth", authRoutes);
