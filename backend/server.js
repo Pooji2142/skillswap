@@ -1,5 +1,4 @@
 // backend/server.js
-
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
@@ -15,35 +14,39 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-// ✅ Allow only localhost frontend (for local use)
+// ✅ CORS setup — allow both local & deployed frontend
 app.use(
   cors({
     origin: [
-      "http://localhost:3000", // local frontend
-      "https://skill-swap-project.netlify.app", // deployed frontend
+      "http://localhost:3000",                   // local React dev
+      "https://skill-swap-project.netlify.app",  // your deployed frontend on Netlify
     ],
     credentials: true,
   })
 );
 
-
-// ✅ ROUTES
+// ✅ ROUTES (all prefixed with /api)
 app.use("/api/auth", authRoutes);
 app.use("/api/skills", skillRoutes);
 app.use("/api/requests", requestRoutes);
 app.use("/api/messages", messageRoutes);
 
-// ✅ TEST route
+// ✅ TEST route to confirm server works
 app.get("/", (req, res) => {
-  res.send("✅ SkillSwap Backend running locally");
+  res.send("✅ SkillSwap Backend is running successfully 🚀");
 });
 
-// ✅ MONGODB CONNECTION
+// ✅ CONNECT MONGODB
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
-// ✅ START SERVER
+// ✅ START SERVER (local only)
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Local Server running at http://localhost:${PORT}`));
+app.listen(PORT, () =>
+  console.log(`🚀 Server running locally at http://localhost:${PORT}`)
+);
+
+// ✅ Export for Vercel deployment
+export default app;
