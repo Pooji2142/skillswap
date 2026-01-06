@@ -1,5 +1,12 @@
-import { BrowserRouter as Router, Routes, Route, Link, Navigate } from "react-router-dom";
-import { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  Navigate,
+} from "react-router-dom";
+import { useEffect, useState } from "react";
+
 import Login from "./components/Login";
 import Register from "./components/Register";
 import MySkills from "./components/MySkills";
@@ -7,10 +14,18 @@ import Explore from "./components/Explore";
 import Learning from "./components/Learning";
 import Home from "./components/Home";
 import About from "./components/About";
-import bg from "./assets/images/bg.jpg"; // background image import
+import bg from "./assets/images/bg.jpg";
 
 function App() {
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState(null);
+  const [authReady, setAuthReady] = useState(false);
+
+  // ✅ stabilize token on first load
+  useEffect(() => {
+    const savedToken = localStorage.getItem("token");
+    setToken(savedToken);
+    setAuthReady(true);
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -18,11 +33,18 @@ function App() {
     setToken(null);
   };
 
-  // No backgroundStyle on the outermost div
+  if (!authReady) {
+    return (
+      <div className="text-center mt-5">
+        <h5>Loading...</h5>
+      </div>
+    );
+  }
+
   const wrapperStyle = {
     minHeight: "100vh",
     backgroundImage: `url(${bg})`,
-    backgroundSize: "cover", // Better for a full-page look
+    backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundAttachment: "fixed",
@@ -38,25 +60,14 @@ function App() {
     <Router>
       <nav
         className="navbar navbar-expand-lg navbar-light fixed-top"
-        style={{ backgroundColor: "rgba(255, 255, 255, 0.85)" }}
+        style={{ backgroundColor: "rgba(255,255,255,0.85)" }}
       >
         <div className="container">
           <Link className="navbar-brand fw-bold text-dark" to="/">
             SkillSwap
           </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
 
-          <div className="collapse navbar-collapse" id="navbarNav">
+          <div className="collapse navbar-collapse">
             <ul className="navbar-nav me-auto">
               <li className="nav-item">
                 <Link className="nav-link fw-bold text-dark" to="/">
@@ -68,29 +79,21 @@ function App() {
                   About
                 </Link>
               </li>
+
               {token && (
                 <>
                   <li className="nav-item">
-                    <Link
-                      className="nav-link fw-bold text-dark"
-                      to="/my-skills"
-                    >
+                    <Link className="nav-link fw-bold text-dark" to="/my-skills">
                       My Skills
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link
-                      className="nav-link fw-bold text-dark"
-                      to="/explore"
-                    >
+                    <Link className="nav-link fw-bold text-dark" to="/explore">
                       Explore
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link
-                      className="nav-link fw-bold text-dark"
-                      to="/learning"
-                    >
+                    <Link className="nav-link fw-bold text-dark" to="/learning">
                       Learning
                     </Link>
                   </li>
@@ -102,18 +105,12 @@ function App() {
               {!token ? (
                 <>
                   <li className="nav-item">
-                    <Link
-                      className="nav-link fw-bold text-dark"
-                      to="/login"
-                    >
+                    <Link className="nav-link fw-bold text-dark" to="/login">
                       Login
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link
-                      className="nav-link fw-bold text-dark"
-                      to="/register"
-                    >
+                    <Link className="nav-link fw-bold text-dark" to="/register">
                       Register
                     </Link>
                   </li>
@@ -133,22 +130,22 @@ function App() {
         </div>
       </nav>
 
-      {/* The background image is set here, just below the navbar */}
       <div style={wrapperStyle}>
         <div style={overlayStyle}>
-          {/* Add spacing for fixed navbar */}
           <div style={{ paddingTop: "70px" }} className="container mt-4">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
+
               <Route
                 path="/login"
-                element={!token ? <Login setToken={setToken} /> : <Navigate to="/" />}
+                element={!token ? <Login setToken={setToken} /> : <Navigate to="/my-skills" />}
               />
               <Route
                 path="/register"
-                element={!token ? <Register setToken={setToken} /> : <Navigate to="/" />}
+                element={!token ? <Register setToken={setToken} /> : <Navigate to="/my-skills" />}
               />
+
               <Route
                 path="/my-skills"
                 element={token ? <MySkills /> : <Navigate to="/login" />}
@@ -161,6 +158,7 @@ function App() {
                 path="/learning"
                 element={token ? <Learning /> : <Navigate to="/login" />}
               />
+
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </div>

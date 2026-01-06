@@ -7,33 +7,47 @@ const MySkills = () => {
   const [editing, setEditing] = useState(null);
 
   const fetchSkills = async () => {
-    const data = await apiGet("/api/skills/my");
-    setSkills(data || []);
+    try {
+      const data = await apiGet("/api/skills/my");
+      setSkills(data || []);
+    } catch (err) {
+      console.error("Fetch MySkills error:", err.message);
+      setSkills([]);
+    }
   };
 
   useEffect(() => { fetchSkills(); }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (editing) {
-      // ✅ fixed: added /api/
-      await apiPut(`/api/skills/${editing._id}`, form);
-      setEditing(null);
-    } else {
-      // ✅ fixed: added /api/
-      await apiPost("/api/skills", form);
+    try {
+      if (editing) {
+        await apiPut(`/api/skills/${editing._id}`, form);
+        setEditing(null);
+      } else {
+        await apiPost("/api/skills", form);
+      }
+      setForm({ skillName: "", description: "", level: "" });
+      fetchSkills();
+    } catch (err) {
+      console.error("MySkills submit error:", err.message);
+      alert("Failed to save skill");
     }
-    setForm({ skillName: "", description: "", level: "" });
-    fetchSkills();
   };
 
-  const handleEdit = (s) => setEditing(s) || setForm(s);
+  const handleEdit = (s) => {
+    setEditing(s);
+    setForm({ skillName: s.skillName, description: s.description, level: s.level });
+  };
 
   const handleDelete = async (id) => {
-    if (window.confirm("Delete this skill?")) {
-      // ✅ fixed: added /api/
+    if (!window.confirm("Delete this skill?")) return;
+    try {
       await apiDelete(`/api/skills/${id}`);
       fetchSkills();
+    } catch (err) {
+      console.error("Delete skill error:", err.message);
+      alert("Failed to delete skill");
     }
   };
 
@@ -83,18 +97,8 @@ const MySkills = () => {
                 <p>{s.description}</p>
                 <small className="text-muted">{s.level}</small>
                 <div className="mt-2">
-                  <button
-                    className="btn btn-sm btn-outline-primary me-2"
-                    onClick={() => handleEdit(s)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="btn btn-sm btn-outline-danger"
-                    onClick={() => handleDelete(s._id)}
-                  >
-                    Delete
-                  </button>
+                  <button className="btn btn-sm btn-outline-primary me-2" onClick={() => handleEdit(s)}>Edit</button>
+                  <button className="btn btn-sm btn-outline-danger" onClick={() => handleDelete(s._id)}>Delete</button>
                 </div>
               </div>
             </div>

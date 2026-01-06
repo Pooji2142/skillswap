@@ -11,20 +11,21 @@ const Login = ({ setToken }) => {
     e.preventDefault();
 
     try {
-      // ✅ Corrected endpoint to match backend route
       const data = await apiPost("/api/auth/login", { email, password });
 
-      console.log("Login response:", data); // Debugging
-
-      if (data.token) {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("userName", data.user?.name || "User");
-        setToken(data.token);
-        alert("✅ Login successful!");
-        navigate("/"); // optional: redirect to homepage or dashboard
-      } else {
-        alert(data.message || "❌ Login failed. Please check your credentials.");
+      if (!data || !data.token) {
+        alert(data?.message || "❌ Login failed. Check credentials or backend URL");
+        return;
       }
+
+      // Save token
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("userName", data.user?.name || "User");
+      setToken(data.token);
+
+      alert("✅ Login successful!");
+      navigate("/");
+
     } catch (error) {
       console.error("Login error:", error);
       alert("⚠️ Something went wrong. Try again later.");
@@ -42,8 +43,8 @@ const Login = ({ setToken }) => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          autoComplete="email"
         />
-
         <input
           type="password"
           placeholder="Password"
@@ -51,8 +52,8 @@ const Login = ({ setToken }) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          autoComplete="current-password"
         />
-
         <button type="submit" className="btn btn-primary w-100">
           Login
         </button>
