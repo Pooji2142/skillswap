@@ -2,7 +2,18 @@
 
 SkillSwap is a MERN stack web application that allows users to share, learn, and exchange skills with others. Users can add their skills, request skills from others, and collaborate through a simple and intuitive interface.
 
---------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------
+
+## ⚡ How It Works
+
+1. Users **register or login** to access the platform.
+2. Users can **add their skills** and **browse skills** offered by others.
+3. Users can **send skill requests** to others; the receiver can **accept or reject** the request.
+4. Once a request is accepted, users can **chat one-to-one** to coordinate learning/exchange.
+5. **Protected routes** ensure only authenticated users can access certain features.
+6. All data (users, skills, requests, messages) is stored in **MongoDB**, handled via **Express.js APIs**, and consumed in the **React frontend**.
+
+------------------------------------------------------------------------------------------------------------------------------------------
 
 ## 🚀 Features
 
