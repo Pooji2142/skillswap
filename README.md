@@ -164,4 +164,25 @@ Frontend: http://localhost:3000
 Backend: http://localhost:5000
 
 
+----------------------------------------------------------------------------------------------------------------
+
+# 📸 Screenshots
+
+### Home Page 
+![Home Page](screenshots/home.png)
+
+### Register Page
+![Register](screenshots/register.png)
+
+### Login Page
+![Login](screenshots/login.png)
+
+### Home Page (After Login)
+![Home Page](screenshots/home.png)
+
+### Add Skill
+![Add Skill](screenshots/add-skill.png)
+
+### Browse Skills
+![Browse Skills](screenshots/browse-skills.png)
 
