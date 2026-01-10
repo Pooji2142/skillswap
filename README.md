@@ -97,29 +97,36 @@ SKILLSWAP_COPY/
 └── .gitignore
 
 
-
+```
 ------------------------------------------------------------------------------------------------------------------------------------
 
-## ⚙️ Installation & Setup
+# ⚙️ Installation & Setup
 
 ### Backend
 ```bash
 cd backend
 npm install
 npm run dev
+```
 Create a .env file in the backend folder:
 
-env
+```
+.env
 Copy code
 MONGO_URI=your_mongodb_url
 JWT_SECRET=your_secret
 PORT=5000
+
+```
 Frontend
-bash
+```bash
 Copy code
 cd frontend
 npm install
 npm start
+
+```
+
 The application will run on:
 
 Frontend: http://localhost:3000
