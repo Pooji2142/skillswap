@@ -184,7 +184,7 @@ Backend: http://localhost:5000
 ![Home Page](screenshots/after_login_Home.png)
 
 ### Add Skill
-![Add Skill](screenshots/add-skill.png)
+![Add Skill](screenshots/addskills.png)
 
 ### Browse Skills
 ![Browse Skills](screenshots/browse-skills.png)
