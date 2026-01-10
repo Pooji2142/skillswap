@@ -40,10 +40,7 @@ SkillSwap is a MERN stack web application that allows users to share, learn, and
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
-## 📂 Project Structure
-
 SKILLSWAP_COPY/
-│
 ├── backend/
 │   ├── middleware/
 │   │   └── authMiddleware.js
@@ -60,7 +57,6 @@ SKILLSWAP_COPY/
 │   │   ├── requestRoutes.js
 │   │   └── messageRoutes.js
 │   │
-│   ├── node_modules/
 │   ├── .env
 │   ├── package.json
 │   ├── package-lock.json
@@ -68,12 +64,9 @@ SKILLSWAP_COPY/
 │
 ├── frontend/
 │   ├── build/
-│   ├── node_modules/
 │   ├── public/
-│   │
 │   ├── src/
 │   │   ├── assets/
-│   │
 │   │   ├── components/
 │   │   │   ├── About.js
 │   │   │   ├── ChatBox.js
@@ -92,12 +85,14 @@ SKILLSWAP_COPY/
 │   │   │
 │   │   ├── App.js
 │   │   ├── index.js
-│   │   └── reportWebVitals.js
-│   │   |--setUpTests.js
+│   │   ├── reportWebVitals.js
+│   │   └── setUpTests.js
+│   │
 │   └── package.json
 │
 ├── README.md
 └── .gitignore
+
 
 ------------------------------------------------------------------------------------------------------------------------------------
 
