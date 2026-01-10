@@ -17,14 +17,33 @@ SkillSwap is a MERN stack web application that allows users to share, learn, and
 
 ## 🚀 Features
 
-- 🔐 User Authentication (Login / Register)
-- ➕ Add, Edit & Delete Skills
-- 🔍 Browse Skills from Other Users
-- 🤝 Skill Exchange Requests
-- ✅ Accept / Reject Skill Requests
-- 💬 One-to-One Chat after Request Acceptance
-- 🛡️ Protected Routes using JWT
-- 🌐 Responsive UI
+## Features
+
+1. **User Authentication**  
+   - Register and login functionality.
+   - Passwords securely hashed.
+   - Protected routes for authenticated users only.
+
+2. **Skill Management**  
+   - Users can add, edit, or delete their skills.
+   - Browse all skills offered by other users.
+
+3. **Skill Requests**  
+   - Send requests to other users to learn their skills.
+   - Request receiver can accept or reject requests.
+
+4. **Chat System**  
+   - One-to-one chat after a request is accepted.
+   - Real-time messaging (optional: using Socket.io).
+
+5. **Data Storage**  
+   - MongoDB stores users, skills, requests, and messages.
+   - Express.js APIs handle CRUD operations.
+   - React.js frontend consumes APIs.
+
+6. **Protected Routes**  
+   - Only logged-in users can access certain pages like adding skills, sending requests, and chatting.
+
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------
