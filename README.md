@@ -17,8 +17,6 @@ SkillSwap is a MERN stack web application that allows users to share, learn, and
 
 ## 🚀 Features
 
-## Features
-
 1. **User Authentication**  
    - Register and login functionality.
    - Passwords securely hashed.
@@ -44,7 +42,11 @@ SkillSwap is a MERN stack web application that allows users to share, learn, and
 6. **Protected Routes**  
    - Only logged-in users can access certain pages like adding skills, sending requests, and chatting.
 
+--------------------------------------------------------------------------------------------------------------------------------------------
 
+## 📸 Screenshots
+
+For all screenshots of SkillSwap, see [here](screenshots/README.md)
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 
