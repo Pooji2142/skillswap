@@ -2,7 +2,7 @@
 
 SkillSwap is a MERN stack web application that allows users to share, learn, and exchange skills with others. Users can add their skills, request skills from others, and collaborate through a simple and intuitive interface.
 
----
+--------------------------------------------------------------------------------------------------------------------------------------------
 
 ## 🚀 Features
 
