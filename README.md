@@ -169,7 +169,10 @@ Backend: http://localhost:5000
 # 📸 Screenshots
 
 ### Home Page 
-![Home Page](screenshots/home.png)
+![Home Page](screenshots/Home.png)
+
+### About Page
+![About](screenshots/about.png)
 
 ### Register Page
 ![Register](screenshots/register.png)
@@ -178,7 +181,7 @@ Backend: http://localhost:5000
 ![Login](screenshots/login.png)
 
 ### Home Page (After Login)
-![Home Page](screenshots/home.png)
+![Home Page](screenshots/after_login_Home.png)
 
 ### Add Skill
 ![Add Skill](screenshots/add-skill.png)
