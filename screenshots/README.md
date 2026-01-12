@@ -47,12 +47,22 @@ Displays the updated skills list after successfully adding a new skill.
 ### My Skills
 Displays all skills added by the logged-in user, with options to manage them.
 
-![My Skills](my-skills.png)
+![My Skills](My_skills.png)
+
+### Edit Skill
+Allows users to update the details of an existing skill such as name, description, or proficiency level.
+
+![Edit Skill](update_skill.png)
+
+### Delete Skill
+Allows users to permanently remove a skill from their profile.
+
+![Delete Skill](delete_skill.png)
 
 ### Explore Skills
 Allows users to browse skills offered by other users on the platform.
 
-![Explore Skills](browse-skills.png)
+![Explore Skills](explore_skills.png)
 
 ---
 
