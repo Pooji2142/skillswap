@@ -37,12 +37,12 @@ Personalized home page showing available skills and navigation options after suc
 ### Add Skill – Form
 Shows the skill creation form where the user enters the skill name, description, and proficiency level.
 
-![Add Skill Form](add-skill-form.png)
+![Add Skill Form](add_skill_form.png)
 
 ### Add Skill – After Submission
 Displays the updated skills list after successfully adding a new skill.
 
-![Add Skill Success](add-skill-success.png)
+![Add Skill Success](after_adding_skill.png)
 
 ### My Skills
 Displays all skills added by the logged-in user, with options to manage them.
