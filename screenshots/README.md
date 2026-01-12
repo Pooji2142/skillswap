@@ -32,6 +32,12 @@ Personalized home page showing available skills and navigation options after suc
 
 ---
 
+## About Page
+Provides information about the SkillSwap platform and its purpose.
+
+![About](about.png)
+
+---
 ## Skill Management
 
 ### Add Skill – Form
@@ -73,48 +79,71 @@ Users can send a skill request to another user to initiate skill exchange.
 
 ![Send Request](send-request.png)
 
-### Sent Requests
-Shows all skill requests sent by the logged-in user and their current status.
+## Learning Dashboard
 
-![Sent Requests](sent-requests.png)
+The Learning Dashboard is a centralized page where users can manage all skill exchange requests.  
+It shows **sent requests**, **received requests**, and the **status of each request** (pending or accepted) on the same page.
 
-### Received Requests
-Displays incoming skill requests, which can be accepted or rejected.
+### 📤 Sender View – Sent Requests
+Shows the requests sent by the logged-in user along with their current status.
 
-![Received Requests](received-requests.png)
+Example:
+To user456 – Skill: React.js (Pending)
 
-### Request Accepted
-Indicates that a skill request has been accepted, enabling further interaction.
+![Learning Dashboard – Sender](learning-dashboard-sender.png)
 
-![Request Accepted](request-accepted.png)
+### 📥 Receiver View – Before Accepting
+Shows the incoming request for **user456** before it is accepted.  
+The user can see the request and has options to **Accept** or **Reject**.
+
+Example:
+From user123 – Skill: React.js (Pending)
+
+![Learning Dashboard – Receiver Before Accepting](learning-dashboard-receiver-before.png)
 
 ---
 
+### 📥 Receiver View – After Accepting
+Shows the same request for **user456** after it has been accepted.  
+The status now shows **Accepted**, and the user can proceed to chat or coordinate learning.
+
+Example:
+From user123 – Skill: React.js (Accepted)
+
+![Learning Dashboard – Receiver After Accepting](learning-dashboard-receiver-after.png)
+---
+
+### 📤 Sender View – After Acceptance
+Shows the sent request from **user123**’s perspective after **user456 accepted** it.  
+The status now shows **Accepted**.
+
+Example:
+To user456 – Skill: React.js (Accepted)
+
+![Learning Dashboard – Sender After Acceptance](learning-dashboard-sender-after.png)
+
+--------
+
 ## Chat System
+
+Chat functionality becomes available **only after a skill request has been accepted**.  
+Users can then communicate directly to coordinate learning or skill exchange.
 
 ### Chat List
 Displays all active conversations initiated after request acceptance.
 
-![Chat List](chat-list.png)
-
 ### One-to-One Chat
-Allows users to communicate directly to coordinate learning or skill exchange.
+Allows users to send and receive messages in real time with another user.
 
-![One-to-One Chat](chat.png)
+user123 chat 
+![Chat of_user123](user123_chat.png)
 
----
-
-## About Page
-Provides information about the SkillSwap platform and its purpose.
-
-![About](about.png)
+user456 chat 
+![Chat of_user456](user456_chat.png)
 
 ---
 
 ## Live Application
 
-### Deployed Frontend
-Screenshot of the live deployed SkillSwap application hosted on Netlify.
-
-![Frontend Live](frontend-live.png)
+🔗 [See Live App on Netlify](https://skill-swap-project.netlify.app/)
 
